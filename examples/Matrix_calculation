@@ -1,6 +1,5 @@
 import numpy as np
-
-from goph419 import linalg
+import scipy.linalg
 
 
 def main():
@@ -23,9 +22,28 @@ def main():
     print(f"x.shape = {x.shape}")
     print(x)
 
-    x419 = linalg.solve(A, b)
+    x419 = np.linalg.solve(A, b)
     print(f"x419.shape = {x419.shape}")
     print(x419)
+
+    Ap = np.array(
+        [
+            [0, -10, 0],
+            [-10, 25, -15],
+            [0, -15, 15],
+        ],
+        dtype=float,
+    )
+    print(f"Ap.shape = {Ap.shape}")
+    print(A)
+
+    xp = np.linalg.solve(Ap, b)
+    print(f"x.shape = {xp.shape}")
+    print(xp)
+
+    xp419 = np.linalg.solve(Ap, b)
+    print(f"x419.shape = {xp419.shape}")
+    print(xp419)
 
 
 if __name__ == "__main__":

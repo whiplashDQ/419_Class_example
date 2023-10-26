@@ -11,6 +11,34 @@ def solve(a, b):
     b : numpy.ndarray, shape=(M,)
         The dependent variable values
 
+    ###########
+    ###########
+    we can do partial pivoting by swapping rows
+    so it will not change the solution and the determinant
+    ###########   
+    ########### 
+
+    ###########
+    Note: 
+    Ax= b
+    (LU)x = b
+    A = LU
+
+    L(Ux) = b  # first step
+    # L is lower triangular matrix
+    # U is upper triangular matrix  
+    Ld = b
+    ux = d # second step
+
+
+
+    
+    every invertible matrix can be decomposed into
+    a product of a lower triangular matrix and an upper triangular matrix
+
+
+
+
     Returns
     -------
     numpy.ndarray, shape=(M,)
@@ -41,6 +69,18 @@ def solve(a, b):
     aug = np.hstack([a, np.reshape(b, (m, 1))])
     # solve by the GE algorithm
     for k in range(m):
+        # perform partial pivoting
+        # find the row with the largest pivot
+        piv = np.abs(aug[k,k])
+        for k1 in range(k+1,m):
+            piv1 = np.abs(aug[k1,k])
+            if piv1 > piv:
+                kpiv = k1
+                piv = piv1
+        aug[k,: ],aug[kpiv,: ] = np.array(aug[kpiv,: ]),np.array(aug[k,: ])
+        # check for singular matrix
+
+
         # calculate elimination coefficients
         # slice = start(:stop(:step))
         aug[k+1:, k] /= aug[k, k]
